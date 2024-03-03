@@ -34,9 +34,11 @@ local function bark(sender_number, content)
     log.debug("notification_helper", "Calling Bark API: "..url)
 
     local request_body = {
-        title = sender_number,
+        -- {标题前缀} - {发送者号码}
+        title = config.notification_channel.bark.title_prefix.." - "..sender_number,
         body = content,
         level = "timeSensitive",
+        group = config.notification_channel.bark.group
     }
 
     local code, headers, body = http.request(

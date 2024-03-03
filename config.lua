@@ -40,7 +40,11 @@ config.notification_channel = {
     -- Bark
     bark = {
         enabled = false,
-        api_key = ""
+        api_key = "",
+        -- 标题前缀
+        title_prefix = "Air780",
+        -- 短信分组
+        group = "Air780"
     },
     -- Server酱
     server_chan = {

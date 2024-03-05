@@ -14,4 +14,30 @@ function utils.clear_table(table)
     end
 end
 
+-- 从短信内容中解析出验证码，返回最长的一段数字
+function utils.extract_verification_code(smsContent)
+    local longestCode = ""
+    local currentCode = ""
+
+    for i = 1, #smsContent do
+        local char = smsContent:sub(i, i)
+        if char:match("%d") then
+            currentCode = currentCode .. char
+        else
+            if #currentCode >= 4 and #currentCode > #longestCode then
+                longestCode = currentCode
+            end
+            currentCode = ""
+        end
+    end
+
+    -- 检查最后一段数字
+    if #currentCode >= 4 and #currentCode > #longestCode then
+        longestCode = currentCode
+    end
+
+    -- 如果没有找到数字，返回原文
+    return #longestCode > 0 and longestCode or smsContent
+end
+
 return utils

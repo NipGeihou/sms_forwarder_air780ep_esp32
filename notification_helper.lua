@@ -38,7 +38,9 @@ local function bark(sender_number, content)
         title = config.notification_channel.bark.title_prefix.." - "..sender_number,
         body = content,
         level = "timeSensitive",
-        group = config.notification_channel.bark.group
+        group = config.notification_channel.bark.group,
+        -- 从短信内容中提取验证码到剪贴板
+        copy = utils.extract_verification_code(content)
     }
 
     local code, headers, body = http.request(

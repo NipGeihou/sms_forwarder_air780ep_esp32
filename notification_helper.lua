@@ -40,7 +40,8 @@ local function bark(sender_number, content)
         level = "timeSensitive",
         group = config.notification_channel.bark.group,
         -- 从短信内容中提取验证码到剪贴板
-        copy = utils.extract_verification_code(content)
+        copy = utils.extract_verification_code(content),
+        autoCopy = "1"
     }
 
     local code, headers, body = http.request(
